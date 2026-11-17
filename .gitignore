@@ -8,3 +8,9 @@
 !/photos/*.jpg
 !/assets/
 !/assets/*
+!/fonts/
+!/fonts/Cursor-Apple.otf
+
+# System metadata is never published.
+.DS_Store
+**/.DS_Store

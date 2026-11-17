@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>no more cmy</title>
-    <meta name="description" content="An independent archive and curatorial project dedicated to design in black, white and grey.">
+    <meta name="description" content="A stage for work in black, white and grey, and a shared space for those who create, collect and appreciate it.">
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="https://use.typekit.net/bqk8rmx.css">
     <script src="gsap.js"></script>
@@ -388,7 +388,7 @@ a img {
         .contact { width: auto; left: 2rem; transform: none; bottom: 2rem; }
         .header { z-index: 100; pointer-events: none; }
         .index-menu--left .index-list { min-width: 17rem; }
-        .index-menu--right .index-item { display: block; background: transparent; margin-bottom: .4rem; padding: 0; }
+        .index-menu--right .index-item { display: block; background: #fff; margin-bottom: .4rem; padding: .1em .3em; box-sizing: border-box; }
         .index-menu--right .index-list { min-width: 17rem; }
         .index-list { max-height: 0; }
         .index-list.active { overflow-y: auto; max-height: 75vh; }
@@ -402,10 +402,50 @@ a img {
             .index-list { max-width: calc(100vw - 2rem); }
             .index-menu--right .index-list { width: 17rem; }
         }
+        :root { --site-font: swiss-721-bt, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        body { isolation: isolate; }
+        body, body * {
+            font-family: var(--site-font) !important;
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            font-style: normal !important;
+        }
+        .header { z-index: 0; }
+        .photos { z-index: 1; touch-action: none; gap: 0; }
+        .contact { z-index: 1000; }
+        #custom-cursor { max-width: calc(100vw - 2rem); white-space: normal; text-align: center; }
+        @media (max-width: 768px) {
+            .contact { bottom: 3.5rem !important; white-space: nowrap; }
+        }
+        #work-viewer {
+            position: fixed; inset: 0; width: 100vw; height: 100dvh;
+            max-width: none; max-height: none; border: 0; margin: 0;
+            padding: clamp(24px, 5vw, 64px); box-sizing: border-box;
+            background: #0b0b0a; color: #f1f1f1; cursor: auto;
+        }
+        #work-viewer::backdrop { background: #0b0b0a; }
+        #work-viewer figure { height: 100%; display: flex; flex-direction: column; gap: 24px; }
+        #work-media { display: flex; flex: 1; min-height: 0; width: 100%; padding-top: 32px; }
+        #work-media img, #work-media video { width: 100%; height: 100%; object-fit: contain; filter: none; }
+        #work-caption { flex: none; text-align: center; line-height: 1.5; white-space: pre-line; }
+        #work-close { position: absolute; top: 16px; right: 24px; border: 0; background: none; color: inherit; padding: 12px; cursor: pointer; }
+        #work-viewer * { cursor: auto; }
+        #work-close { cursor: pointer; }
+        @media (max-width: 768px) { #work-viewer { padding: 20px 16px 32px; } }
+        body .project-name { font-style: italic !important; }
+        @font-face {
+            font-family: 'Cursor Apple';
+            src: url('fonts/Cursor-Apple.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        body .index-trigger, body #work-close { font-family: 'Cursor Apple' !important; font-size: 18px !important; line-height: 1; }
     </style>
 </head>
 
 <body>
+
     <div class="header">
         <div class="text">
             
@@ -415,24 +455,31 @@ a img {
     <div class="contact"><p class="contact_text">Design in black, white and grey.</p></div>
 
     <div class="index-menu index-menu--right">
-        <button class="index-trigger right" aria-label="Works" aria-expanded="false">·*. ^+</button>
-        <div class="index-list"></div>
+        <button class="index-trigger right" aria-label="Submit" aria-expanded="false">c</button>
+        <div class="index-list">
+            <div class="index-item">Submissions open periodically through open calls.</div>
+            <div class="index-item">There is no open call at present. Guidelines and submission details will be published here when the next call opens.</div>
+        </div>
     </div>
 
     <div id="custom-cursor"></div>
     <div class="index-menu index-menu--left">
-        <button class="index-trigger left" aria-label="About" aria-expanded="false">: )</button>
+        <button class="index-trigger left" aria-label="About" aria-expanded="false">?</button>
         <div class="index-list">
-            <div class="index-item">no more cmy is an independent archive and curatorial project dedicated to design in black, white and grey.</div><br><br>
-            <div class="index-item">A shared space for publications, graphic work and other visual practices, bringing black, white and grey design into view.</div><br><br>
-            <div class="index-item">All featured works are credited to their creator.</div>
+            <div class="index-item"><em class="project-name">no more cmy</em> is an emerging collection of work in black, white and grey, giving these works a stage of their own.</div><br><br>
+            <div class="index-item">Bringing together publications, graphic works and other visual practices, it offers a place to discover, revisit and draw inspiration from the collection.</div><br><br>
+            <div class="index-item">A shared space for those who create, collect and appreciate it.</div>
         </div>
     </div>
     <div class="photos-wrapper">
 
-    <div class="photos"><div class="photos_line"><div class="photos_line_photo" data-cursor-text="The Grid (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-07.jpg" target="_blank" rel="noopener" aria-label="The Grid (No Free Design) — Joanna Zhu"><img src="photos/joanna-01.jpg" alt="The Grid (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM — Joanna Zhu"><a class="image-link" href="assets/joanna-04.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-02.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-08.jpg" target="_blank" rel="noopener" aria-label="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><img src="photos/joanna-03.jpg" alt="The Pursuit of Freedom (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-02.jpg" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><img src="photos/joanna-04.jpg" alt="Design As Thinking As Thinking (No Free Design) — Joanna Zhu" decoding="async"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Booklet — Joanna Zhu"><a class="image-link" href="assets/joanna-09.mp4" target="_blank" rel="noopener" aria-label="Booklet — Joanna Zhu"><video src="assets/joanna-09.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Booklet — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM / 02 — Joanna Zhu"><a class="image-link" href="assets/joanna-05.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM / 02 — Joanna Zhu"><img src="photos/joanna-06.jpg" alt="INDEX X UNiFORM / 02 — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking / Motion — Joanna Zhu"><a class="image-link" href="assets/joanna-03.gif" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking / Motion — Joanna Zhu"><img src="assets/joanna-03.gif" alt="Design As Thinking As Thinking / Motion — Joanna Zhu"></a></div><div class="photos_line_photo" data-cursor-text="Surtsey book — Joanna Zhu"><a class="image-link" href="assets/joanna-12.mp4" target="_blank" rel="noopener" aria-label="Surtsey book — Joanna Zhu"><video src="assets/joanna-12.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Surtsey book — Joanna Zhu"></video></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM / 03 — Joanna Zhu"><a class="image-link" href="assets/joanna-06.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM / 03 — Joanna Zhu"><img src="photos/joanna-09.jpg" alt="INDEX X UNiFORM / 03 — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The same stranger — Joanna Zhu"><a class="image-link" href="assets/joanna-13.mp4" target="_blank" rel="noopener" aria-label="The same stranger — Joanna Zhu"><video src="assets/joanna-13.mp4" muted autoplay loop playsinline preload="metadata" aria-label="The same stranger — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="No Free Design / Overview — Joanna Zhu"><a class="image-link" href="assets/joanna-10.jpg" target="_blank" rel="noopener" aria-label="No Free Design / Overview — Joanna Zhu"><img src="photos/joanna-11.jpg" alt="No Free Design / Overview — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Joanna Zhu / Motion study — Joanna Zhu"><a class="image-link" href="assets/joanna-01.gif" target="_blank" rel="noopener" aria-label="Joanna Zhu / Motion study — Joanna Zhu"><img src="assets/joanna-01.gif" alt="Joanna Zhu / Motion study — Joanna Zhu"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Joanna Zhu / Untitled — Joanna Zhu"><a class="image-link" href="assets/joanna-11.png" target="_blank" rel="noopener" aria-label="Joanna Zhu / Untitled — Joanna Zhu"><img src="photos/joanna-13.jpg" alt="Joanna Zhu / Untitled — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Grid (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-07.jpg" target="_blank" rel="noopener" aria-label="The Grid (No Free Design) — Joanna Zhu"><img src="photos/joanna-01.jpg" alt="The Grid (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM — Joanna Zhu"><a class="image-link" href="assets/joanna-04.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-02.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-08.jpg" target="_blank" rel="noopener" aria-label="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><img src="photos/joanna-03.jpg" alt="The Pursuit of Freedom (No Free Design) — Joanna Zhu" decoding="async"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-02.jpg" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><img src="photos/joanna-04.jpg" alt="Design As Thinking As Thinking (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Booklet — Joanna Zhu"><a class="image-link" href="assets/joanna-09.mp4" target="_blank" rel="noopener" aria-label="Booklet — Joanna Zhu"><video src="assets/joanna-09.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Booklet — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM / 02 — Joanna Zhu"><a class="image-link" href="assets/joanna-05.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM / 02 — Joanna Zhu"><img src="photos/joanna-06.jpg" alt="INDEX X UNiFORM / 02 — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking / Motion — Joanna Zhu"><a class="image-link" href="assets/joanna-03.gif" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking / Motion — Joanna Zhu"><img src="assets/joanna-03.gif" alt="Design As Thinking As Thinking / Motion — Joanna Zhu"></a></div></div></div>
+    <div class="photos"><div class="photos_line"><div class="photos_line_photo" data-cursor-text="The Grid" data-title="The Grid" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-07.jpg" target="_blank" rel="noopener" aria-label="The Grid — Joanna Zhu"><img src="photos/joanna-01.jpg" alt="The Grid — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM" data-title="INDEX X UNiFORM" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-04.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-02.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Pursuit of Freedom" data-title="The Pursuit of Freedom" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-08.jpg" target="_blank" rel="noopener" aria-label="The Pursuit of Freedom — Joanna Zhu"><img src="photos/joanna-03.jpg" alt="The Pursuit of Freedom — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking" data-title="Design As Thinking As Thinking" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-02.jpg" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking — Joanna Zhu"><img src="photos/joanna-04.jpg" alt="Design As Thinking As Thinking — Joanna Zhu" decoding="async"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Chain Reaction" data-title="Chain Reaction" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-09.mp4" target="_blank" rel="noopener" aria-label="Chain Reaction — Joanna Zhu"><video src="assets/joanna-09.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Chain Reaction — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM" data-title="INDEX X UNiFORM" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-05.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-06.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking" data-title="Design As Thinking As Thinking" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-03.gif" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking — Joanna Zhu"><img src="assets/joanna-03.gif" alt="Design As Thinking As Thinking — Joanna Zhu"></a></div><div class="photos_line_photo" data-cursor-text="Surtsey" data-title="Surtsey" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-12.mp4" target="_blank" rel="noopener" aria-label="Surtsey — Joanna Zhu"><video src="assets/joanna-12.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Surtsey — Joanna Zhu"></video></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM" data-title="INDEX X UNiFORM" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-06.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-09.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The same stranger" data-title="The same stranger" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-13.mp4" target="_blank" rel="noopener" aria-label="The same stranger — Joanna Zhu"><video src="assets/joanna-13.mp4" muted autoplay loop playsinline preload="metadata" aria-label="The same stranger — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="No Free Design" data-title="No Free Design" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-10.jpg" target="_blank" rel="noopener" aria-label="No Free Design — Joanna Zhu"><img src="photos/joanna-11.jpg" alt="No Free Design — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking" data-title="Design As Thinking As Thinking" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-01.gif" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking — Joanna Zhu"><img src="assets/joanna-01.gif" alt="Design As Thinking As Thinking — Joanna Zhu"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="no idea what this actually is but its b&amp;w" data-title="no idea what this actually is but its b&amp;w" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-11.png" target="_blank" rel="noopener" aria-label="no idea what this actually is but its b&amp;w — Joanna Zhu"><img src="photos/joanna-13.jpg" alt="no idea what this actually is but its b&amp;w — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Grid" data-title="The Grid" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-07.jpg" target="_blank" rel="noopener" aria-label="The Grid — Joanna Zhu"><img src="photos/joanna-01.jpg" alt="The Grid — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM" data-title="INDEX X UNiFORM" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-04.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-02.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Pursuit of Freedom" data-title="The Pursuit of Freedom" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-08.jpg" target="_blank" rel="noopener" aria-label="The Pursuit of Freedom — Joanna Zhu"><img src="photos/joanna-03.jpg" alt="The Pursuit of Freedom — Joanna Zhu" decoding="async"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking" data-title="Design As Thinking As Thinking" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-02.jpg" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking — Joanna Zhu"><img src="photos/joanna-04.jpg" alt="Design As Thinking As Thinking — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Chain Reaction" data-title="Chain Reaction" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-09.mp4" target="_blank" rel="noopener" aria-label="Chain Reaction — Joanna Zhu"><video src="assets/joanna-09.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Chain Reaction — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM" data-title="INDEX X UNiFORM" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-05.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-06.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking" data-title="Design As Thinking As Thinking" data-author="Joanna Zhu"><a class="image-link" href="assets/joanna-03.gif" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking — Joanna Zhu"><img src="assets/joanna-03.gif" alt="Design As Thinking As Thinking — Joanna Zhu"></a></div></div></div>
     </div>
     
+<dialog id="work-viewer" aria-label="Work viewer" aria-describedby="work-caption">
+        <button id="work-close" type="button" aria-label="Close work">X</button>
+        <figure><div id="work-media"></div><figcaption id="work-caption"></figcaption></figure>
+    </dialog>
 </body>
 <script>
     const photobox = {
@@ -450,6 +497,9 @@ a img {
         standard_width: 1440,
         scale_nums: 1,
 
+        viewer_open: false,
+        scroll_velocity_x: 0,
+        scroll_velocity_y: 0,
         auto_move_enabled: true, // 默认开启
         base_speed: 0.5,         // 基础向上漂移速度
         boost_speed: 3,          // 按键加速时的速度
@@ -466,6 +516,7 @@ a img {
                 this.resize();
             });
             this.container.addEventListener("mousedown", (event) => {
+                this.scroll_velocity_x = this.scroll_velocity_y = 0;
                 this.if_movable = true;
                 
                 this.auto_move_enabled = false;
@@ -492,6 +543,7 @@ a img {
             });
 
             this.container.addEventListener('touchstart', (event) => {
+                this.scroll_velocity_x = this.scroll_velocity_y = 0;
                 this.if_movable = true;
                 this.auto_move_enabled = false;
                 this.mouse_x = event.touches[0].clientX;
@@ -503,6 +555,15 @@ a img {
             const endTouch = () => { this.if_movable = false; this.auto_move_enabled = true; };
             this.container.addEventListener('touchend', endTouch);
             this.container.addEventListener('touchcancel', endTouch);
+            document.addEventListener('wheel', (event) => {
+                if (this.viewer_open || event.target.closest('.index-menu') || event.ctrlKey) return;
+                event.preventDefault();
+                const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
+                const dx = event.shiftKey && !event.deltaX ? event.deltaY : event.deltaX;
+                const dy = event.shiftKey && !event.deltaX ? 0 : event.deltaY;
+                this.scroll_velocity_x = Math.max(-4000, Math.min(4000, this.scroll_velocity_x - dx * unit * 8));
+                this.scroll_velocity_y = Math.max(-4000, Math.min(4000, this.scroll_velocity_y - dy * unit * 8));
+            }, {passive: false});
             this.initKeyboardControl();
             this.startAutoMove();
             
@@ -511,6 +572,7 @@ a img {
         initKeyboardControl() {
 
             document.addEventListener('keydown', (e) => {
+                if (e.target.closest('button, select, input, textarea, a')) return;
                 const key = e.key.toLowerCase();
 
                 if (e.code === 'Space') {
@@ -537,42 +599,23 @@ a img {
                 }
             });
 
-let wasdHintShown = false;
-
-document.addEventListener('wheel', () => {
-    if (wasdHintShown) return;
-    wasdHintShown = true;
-
-    const wasdHint = document.createElement('div');
-    wasdHint.textContent = 'try wasd';
-    wasdHint.style.cssText = `
-        position: fixed;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10000;
-        font-family: swiss-721-bt, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-weight: 100;
-        font-style: normal;
-        font-style: italic;
-        font-size: 1.875rem;
-        color: #000;
-        pointer-events: none;
-        opacity: 1;
-        transition: opacity 1s ease;
-    `;
-    document.body.appendChild(wasdHint);
-
-    setTimeout(() => {
-        wasdHint.style.opacity = '0';
-        setTimeout(() => wasdHint.remove(), 1000);
-    }, 2000);
-});
 
         },
 
         startAutoMove() {
-            const autoMove = () => {
+            let previousTime;
+            const autoMove = (time) => {
+                const dt = previousTime === undefined ? 1 / 60 : Math.min((time - previousTime) / 1000, 0.05);
+                previousTime = time;
+                if (this.viewer_open) { requestAnimationFrame(autoMove); return; }
+                const frame = dt * 60;
+                const decay = Math.exp(-dt / 0.28);
+                const scrollX = this.scroll_velocity_x * 0.28 * (1 - decay);
+                const scrollY = this.scroll_velocity_y * 0.28 * (1 - decay);
+                this.scroll_velocity_x *= decay;
+                this.scroll_velocity_y *= decay;
+                if (Math.abs(this.scroll_velocity_x) < 0.5) this.scroll_velocity_x = 0;
+                if (Math.abs(this.scroll_velocity_y) < 0.5) this.scroll_velocity_y = 0;
                 if (this.auto_move_enabled) {
 
                     let moveX = 0;
@@ -592,13 +635,15 @@ document.addEventListener('wheel', () => {
                         if (this.keys_pressed.d) moveX += this.boost_speed; // 右
                     }
 
-                    this.autoMoveStep(moveX, moveY);
+                    this.autoMoveStep(moveX * frame + scrollX, moveY * frame + scrollY);
+                } else if (scrollX || scrollY) {
+                    this.autoMoveStep(scrollX, scrollY);
                 }
                 
                 requestAnimationFrame(autoMove);
             };
             
-            autoMove();
+            requestAnimationFrame(autoMove);
 
         },
     
@@ -798,36 +843,55 @@ function positionElements() {
         }
     });
 
-    const indexList = document.querySelector('.index-menu--right .index-list');
-    if (indexList) {
-        const seen = new Set();
-        const items = [];
-
-        document.querySelectorAll('.photos_line_photo').forEach(photo => {
-            const name = photo.getAttribute('data-cursor-text');
-            const link = photo.querySelector('a');
-            const href = link ? link.getAttribute('href') : '#';
-
-            if (name && !seen.has(name)) {
-                seen.add(name);
-                items.push({ name, href });
-            }
-        });
-
-        indexList.innerHTML = items.map(item => `
-            <div class="index-item">
-                <a href="${item.href}" target="_blank">${item.name}</a>
-            </div>
-        `).join('');
-    }
 }
 
 initIndexMenu();
 
-document.querySelectorAll('a').forEach(link => {
-    if (!link.hasAttribute('target')) {
-        link.setAttribute('target', '_blank');
-    }
+const workViewer = document.getElementById('work-viewer');
+const workMedia = document.getElementById('work-media');
+const workCaption = document.getElementById('work-caption');
+let playingPreviews = [];
+let pointerStart = null;
+document.addEventListener('pointerdown', event => {
+    pointerStart = {x: event.clientX, y: event.clientY};
+});
+document.addEventListener('click', event => {
+    const link = event.target.closest('.image-link');
+    if (!link) return;
+    event.preventDefault();
+    if (event.detail && pointerStart && Math.hypot(event.clientX - pointerStart.x, event.clientY - pointerStart.y) > 8) return;
+    const photo = [...document.querySelectorAll('.photos_line_photo')].find(item => item.querySelector('a').getAttribute('href') === link.getAttribute('href'));
+    if (!photo) return;
+    const title = photo.dataset.title;
+    const author = photo.dataset.author;
+    const href = link.getAttribute('href');
+    const video = /\.mp4$/i.test(href);
+    const media = document.createElement(video ? 'video' : 'img');
+    if (video) { media.controls = true; media.playsInline = true; media.autoplay = true; }
+    else { media.alt = title + ' — ' + author; }
+    media.addEventListener('error', () => {
+        const message = document.createElement('p');
+        message.setAttribute('role', 'status');
+        message.textContent = 'Unable to load this work. Close and try again.';
+        workMedia.replaceChildren(message);
+    }, {once: true});
+    media.src = href;
+    workMedia.replaceChildren(media);
+    workCaption.textContent = [title, author].filter(Boolean).join('\n');
+    playingPreviews = [...document.querySelectorAll('.photos video')].filter(v => !v.paused);
+    playingPreviews.forEach(v => v.pause());
+    photobox.viewer_open = true;
+    photobox.scroll_velocity_x = photobox.scroll_velocity_y = 0;
+    document.getElementById('custom-cursor').style.opacity = '0';
+    workViewer.showModal();
+});
+document.getElementById('work-close').addEventListener('click', () => workViewer.close());
+workViewer.addEventListener('close', () => {
+    workMedia.querySelector('video')?.pause();
+    workMedia.replaceChildren();
+    photobox.viewer_open = false;
+    playingPreviews.forEach(v => v.play().catch(() => {}));
+    playingPreviews = [];
 });
 
 </script>
