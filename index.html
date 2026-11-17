@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>no more cmy</title>
+    <meta name="description" content="An independent archive and curatorial project dedicated to design in black, white and grey.">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://use.typekit.net/bqk8rmx.css">
+    <script src="gsap.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            cursor: move;
+        }
+
+        img {
+            pointer-events: none;
+            user-select: none;
+        }
+
+        img {
+        filter: grayscale(100%); 
+        transition: filter 0.5s ease; 
+        }
+
+        img:hover {
+        filter: grayscale(0%);
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        body {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            background-color: #f2f2f2;
+            overflow: hidden;
+            
+            font-family: swiss-721-bt, "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-weight: 100;
+font-style: normal;
+            font-size: .25rem;
+        }
+
+.index-menu {
+    position: fixed;
+    right: 2rem;
+    top: 2rem;
+    z-index: 1000;
+    font-family: swiss-721-bt, "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-weight: 100;
+font-style: normal;
+    font-size: .875rem;
+}
+
+.index-menu--left {
+    right: auto;
+    left: 2rem;
+}
+
+.index-menu--left .index-list {
+    right: auto;
+    left: 0;
+}
+
+.index-menu--left .index-item,
+.index-menu--left .index-item a {
+    text-align: left;
+}
+
+@keyframes blink-soft {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.15; }   
+    100% { opacity: 1; }
+}
+
+.index-trigger {
+    font-style: normal;
+    cursor: pointer;
+    
+}
+
+.right{
+    text-align:left;
+    
+}
+.left{
+    text-align: left;
+}
+.index-menu--right .index-item:hover {
+    animation: blink-soft 1.6s ease-in-out infinite;  
+}
+
+.index-list {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    display: block;
+
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s ease;
+    
+    min-width: 10rem;
+    max-width: 8vh;
+}
+
+.index-list.active {
+    max-height: 60rem;
+    opacity: 1;
+}
+
+.index-item {
+    font-style: normal;
+    color:#111314;
+    padding: 0.2rem 0;
+    text-align:left; 
+    
+    display: block;
+    width: 100%;
+    font-size: 0.875rem;
+}
+
+.index-menu--right .index-item:hover {
+    animation: blink-soft 1.6s ease-in-out infinite;
+}
+
+.index-item a {
+    color: #111314;
+    text-decoration: none;
+    cursor: context-menu;
+    display: block; 
+    text-align: left;
+}
+
+.index-item,
+.index-item a {
+    background-color: #ffffff;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    padding: .1em 0.3em;
+    line-height: 1.25;
+    display: inline;
+}
+
+@media screen and (max-width: 768px) {
+    .index-menu {
+        display: none;
+    }
+}
+
+        .photos {
+            position: absolute;
+            flex-direction: column;
+            overflow: hidden;
+            width: 60%;
+            height: 100%; 
+
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                transparent 0%,
+                black 20%,
+                black 80%,
+                transparent 100%
+            );
+            mask-image: linear-gradient(
+                to bottom,
+                transparent 0%,
+                black 20%,
+                black 80%,
+                transparent 100%
+            )
+
+            }
+
+        .photos_line {
+            font-size: 1px;
+            height: 40em;
+            margin-top: 75em;
+            margin-bottom: 75em;
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        .photos_line_photo {
+            font-size: 1px;
+            width: 135em;
+            
+            aspect-ratio: 1 / 1;
+            margin-left: 45em;
+            margin-right: 45em;
+
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .photos_line_photo img, .photos_line_photo video {
+            height: 100%;
+            transition: 0.3s ease;
+        }
+
+        .photos_line_photo:hover img, .photos_line_photo:hover video {
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
+        }
+
+.photos_line_photo:hover {
+    cursor: none; 
+}
+
+.photos_line_photo:hover a {
+    cursor: none; 
+}
+
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999; 
+    
+    color: white;
+    padding: 5px 10px;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    mix-blend-mode: difference;
+    
+    pointer-events: none; 
+    
+    opacity: 0; 
+    transform: translate(-50%, -50%); 
+    transition: opacity 0.2s ease; 
+}
+
+        @media screen and (max-aspect-ratio: 1.5/1) {
+
+            .photos_line,
+            .photos_line_photo {
+                font-size: 2px;
+            }
+        }
+
+        @media screen and (max-aspect-ratio: 0.8/1) {
+
+            .photos_line,
+            .photos_line_photo {
+                font-size: 2.8px;
+            }
+        }
+
+        .header {
+            position: absolute;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 58%;
+        }
+
+       .text{
+        font-size: 1rem;
+
+       }
+
+       .contact a:hover {
+    cursor: context-menu; 
+}
+
+       .contact {
+        position: absolute;
+        bottom: 5%;
+        left: 5%;
+        transform: translate(-50%,0%);
+        width: 100%;
+        height: 1vh;
+        cursor: context-menu;
+}
+
+.contact_text{
+        font-size: .875rem;
+        
+        font-style: italic;
+        text-transform: capitalize;
+        cursor: context-menu;
+       }
+
+       a{
+        color:black;
+        text-decoration: none;
+        cursor: context-menu;
+       }
+
+a img {
+    max-width: 100%; 
+    height: auto;   
+    display: block; 
+}
+
+@media screen and (max-width: 768px) {
+    
+    body{
+        height: 100svh !important; 
+        overflow: hidden !important;
+    }   
+
+    .photos {
+        
+        position: absolute; 
+        width: 90%; 
+        overflow: visible;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 10rem;
+        transform: translate(-50%, -50%);
+        
+         border: none;
+
+    }
+
+    .photos_line {
+        margin: 0 !important; 
+        height: auto !important;
+        width: auto !important;
+        display: contents; 
+
+    }
+
+    .photos_line_photo {
+        margin: 0 !important; 
+        width: 10.5rem; 
+
+        aspect-ratio: 1 / 1; 
+
+        font-size: 10px; 
+    }
+
+    .header, .contact {
+        position: absolute;
+        left: auto;
+        transform: none;
+        width: 90%;
+        text-align: center;
+    }
+
+    .header{
+        left: 50%; 
+        transform: translate(-50%, -50%);
+        top: 6vh;
+    }
+    .contact{
+        bottom:4vh;
+    }
+
+}
+
+        .photos { width: 100%; height: 100%; }
+        .photos_line {
+            width: max-content;
+            height: clamp(200px, 22vw, 340px);
+            margin: clamp(18px, 3vh, 36px) 0;
+            font-size: 1px;
+        }
+        .photos_line_photo {
+            width: clamp(140px, 20vw, 320px);
+            height: clamp(200px, 22vw, 340px);
+            margin: 0 clamp(12px, 1.5vw, 28px);
+            font-size: 1px;
+            overflow: visible;
+        }
+        .image-link { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; }
+        .photos_line_photo img, .photos_line_photo video {
+            display: block; width: 100%; height: 100%; max-width: 100%;
+            object-fit: contain; pointer-events: none;
+        }
+        .photos_line_photo:hover img, .photos_line_photo:hover video { transform: none; }
+        .contact_text { text-transform: none; }
+        .contact { width: auto; left: 2rem; transform: none; bottom: 2rem; }
+        .header { z-index: 100; pointer-events: none; }
+        .index-menu--left .index-list { min-width: 17rem; }
+        .index-menu--right .index-item { display: block; background: transparent; margin-bottom: .4rem; padding: 0; }
+        .index-menu--right .index-list { min-width: 17rem; }
+        .index-list { max-height: 0; }
+        .index-list.active { overflow-y: auto; max-height: 75vh; }
+        .index-trigger { border: 0; background: none; color: inherit; font: inherit; padding: 0; }
+        @media (max-width: 768px) {
+            .photos { display: flex; top: 12%; height: 76%; width: 100%; overflow: hidden; }
+            .photos_line { display: flex; height: clamp(190px, 54vw, 290px) !important; width: max-content !important; margin: 18px 0 !important; }
+            .photos_line_photo { width: clamp(120px, 42vw, 240px); height: clamp(190px, 54vw, 290px); margin: 0 12px !important; font-size: 1px; }
+            .index-menu { display: block; top: 1rem; right: 1rem; }
+            .index-menu--left { left: 1rem; right: auto; }
+            .index-list { max-width: calc(100vw - 2rem); }
+            .index-menu--right .index-list { width: 17rem; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="text">
+            
+            <p class="text">no more cmy</p>
+        </div>
+    </div>
+    <div class="contact"><p class="contact_text">Design in black, white and grey.</p></div>
+
+    <div class="index-menu index-menu--right">
+        <button class="index-trigger right" aria-label="Works" aria-expanded="false">·*. ^+</button>
+        <div class="index-list"></div>
+    </div>
+
+    <div id="custom-cursor"></div>
+    <div class="index-menu index-menu--left">
+        <button class="index-trigger left" aria-label="About" aria-expanded="false">: )</button>
+        <div class="index-list">
+            <div class="index-item">no more cmy is an independent archive and curatorial project dedicated to design in black, white and grey.</div><br><br>
+            <div class="index-item">A shared space for publications, graphic work and other visual practices, bringing black, white and grey design into view.</div><br><br>
+            <div class="index-item">All featured works are credited to their creator.</div>
+        </div>
+    </div>
+    <div class="photos-wrapper">
+
+    <div class="photos"><div class="photos_line"><div class="photos_line_photo" data-cursor-text="The Grid (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-07.jpg" target="_blank" rel="noopener" aria-label="The Grid (No Free Design) — Joanna Zhu"><img src="photos/joanna-01.jpg" alt="The Grid (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM — Joanna Zhu"><a class="image-link" href="assets/joanna-04.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-02.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-08.jpg" target="_blank" rel="noopener" aria-label="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><img src="photos/joanna-03.jpg" alt="The Pursuit of Freedom (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-02.jpg" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><img src="photos/joanna-04.jpg" alt="Design As Thinking As Thinking (No Free Design) — Joanna Zhu" decoding="async"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Booklet — Joanna Zhu"><a class="image-link" href="assets/joanna-09.mp4" target="_blank" rel="noopener" aria-label="Booklet — Joanna Zhu"><video src="assets/joanna-09.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Booklet — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM / 02 — Joanna Zhu"><a class="image-link" href="assets/joanna-05.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM / 02 — Joanna Zhu"><img src="photos/joanna-06.jpg" alt="INDEX X UNiFORM / 02 — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking / Motion — Joanna Zhu"><a class="image-link" href="assets/joanna-03.gif" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking / Motion — Joanna Zhu"><img src="assets/joanna-03.gif" alt="Design As Thinking As Thinking / Motion — Joanna Zhu"></a></div><div class="photos_line_photo" data-cursor-text="Surtsey book — Joanna Zhu"><a class="image-link" href="assets/joanna-12.mp4" target="_blank" rel="noopener" aria-label="Surtsey book — Joanna Zhu"><video src="assets/joanna-12.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Surtsey book — Joanna Zhu"></video></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM / 03 — Joanna Zhu"><a class="image-link" href="assets/joanna-06.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM / 03 — Joanna Zhu"><img src="photos/joanna-09.jpg" alt="INDEX X UNiFORM / 03 — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The same stranger — Joanna Zhu"><a class="image-link" href="assets/joanna-13.mp4" target="_blank" rel="noopener" aria-label="The same stranger — Joanna Zhu"><video src="assets/joanna-13.mp4" muted autoplay loop playsinline preload="metadata" aria-label="The same stranger — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="No Free Design / Overview — Joanna Zhu"><a class="image-link" href="assets/joanna-10.jpg" target="_blank" rel="noopener" aria-label="No Free Design / Overview — Joanna Zhu"><img src="photos/joanna-11.jpg" alt="No Free Design / Overview — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Joanna Zhu / Motion study — Joanna Zhu"><a class="image-link" href="assets/joanna-01.gif" target="_blank" rel="noopener" aria-label="Joanna Zhu / Motion study — Joanna Zhu"><img src="assets/joanna-01.gif" alt="Joanna Zhu / Motion study — Joanna Zhu"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Joanna Zhu / Untitled — Joanna Zhu"><a class="image-link" href="assets/joanna-11.png" target="_blank" rel="noopener" aria-label="Joanna Zhu / Untitled — Joanna Zhu"><img src="photos/joanna-13.jpg" alt="Joanna Zhu / Untitled — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Grid (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-07.jpg" target="_blank" rel="noopener" aria-label="The Grid (No Free Design) — Joanna Zhu"><img src="photos/joanna-01.jpg" alt="The Grid (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM — Joanna Zhu"><a class="image-link" href="assets/joanna-04.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM — Joanna Zhu"><img src="photos/joanna-02.jpg" alt="INDEX X UNiFORM — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-08.jpg" target="_blank" rel="noopener" aria-label="The Pursuit of Freedom (No Free Design) — Joanna Zhu"><img src="photos/joanna-03.jpg" alt="The Pursuit of Freedom (No Free Design) — Joanna Zhu" decoding="async"></a></div></div><div class="photos_line"><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><a class="image-link" href="assets/joanna-02.jpg" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking (No Free Design) — Joanna Zhu"><img src="photos/joanna-04.jpg" alt="Design As Thinking As Thinking (No Free Design) — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Booklet — Joanna Zhu"><a class="image-link" href="assets/joanna-09.mp4" target="_blank" rel="noopener" aria-label="Booklet — Joanna Zhu"><video src="assets/joanna-09.mp4" muted autoplay loop playsinline preload="metadata" aria-label="Booklet — Joanna Zhu"></video></a></div><div class="photos_line_photo" data-cursor-text="INDEX X UNiFORM / 02 — Joanna Zhu"><a class="image-link" href="assets/joanna-05.jpg" target="_blank" rel="noopener" aria-label="INDEX X UNiFORM / 02 — Joanna Zhu"><img src="photos/joanna-06.jpg" alt="INDEX X UNiFORM / 02 — Joanna Zhu" decoding="async"></a></div><div class="photos_line_photo" data-cursor-text="Design As Thinking As Thinking / Motion — Joanna Zhu"><a class="image-link" href="assets/joanna-03.gif" target="_blank" rel="noopener" aria-label="Design As Thinking As Thinking / Motion — Joanna Zhu"><img src="assets/joanna-03.gif" alt="Design As Thinking As Thinking / Motion — Joanna Zhu"></a></div></div></div>
+    </div>
+    
+</body>
+<script>
+    const photobox = {
+        container: document.querySelector(".photos"),
+        img_data: [],
+        container_width: 0,
+        container_height: 0,
+        content_width: 0,    // 新增：实际内容宽度
+        content_height: 0,
+        photo_width: 0,
+        photo_height: 0,
+        if_movable: false,
+        mouse_x: 0,
+        mouse_y: 0,
+        standard_width: 1440,
+        scale_nums: 1,
+
+        auto_move_enabled: true, // 默认开启
+        base_speed: 0.5,         // 基础向上漂移速度
+        boost_speed: 3,          // 按键加速时的速度
+        keys_pressed: {          // 追踪按键状态
+            w: false,
+            a: false,
+            s: false,
+            d: false
+        },
+
+        init() {
+            this.resize();
+            window.addEventListener("resize", () => {
+                this.resize();
+            });
+            this.container.addEventListener("mousedown", (event) => {
+                this.if_movable = true;
+                
+                this.auto_move_enabled = false;
+
+                this.mouse_x = event.clientX;
+                this.mouse_y = event.clientY;
+
+            });
+
+            this.container.addEventListener("mouseup", () => {
+                this.if_movable = false;
+
+                this.auto_move_enabled = true; // 恢复自动移动
+
+            });
+
+            this.container.addEventListener("mouseleave", () => {
+                this.if_movable = false;
+
+                this.auto_move_enabled = true;
+            });
+            this.container.addEventListener("mousemove", (event) => {
+                this.move(event.clientX, event.clientY);
+            });
+
+            this.container.addEventListener('touchstart', (event) => {
+                this.if_movable = true;
+                this.auto_move_enabled = false;
+                this.mouse_x = event.touches[0].clientX;
+                this.mouse_y = event.touches[0].clientY;
+            }, {passive: true});
+            this.container.addEventListener('touchmove', (event) => {
+                this.move(event.touches[0].clientX, event.touches[0].clientY);
+            }, {passive: true});
+            const endTouch = () => { this.if_movable = false; this.auto_move_enabled = true; };
+            this.container.addEventListener('touchend', endTouch);
+            this.container.addEventListener('touchcancel', endTouch);
+            this.initKeyboardControl();
+            this.startAutoMove();
+            
+        },
+
+        initKeyboardControl() {
+
+            document.addEventListener('keydown', (e) => {
+                const key = e.key.toLowerCase();
+
+                if (e.code === 'Space') {
+            e.preventDefault(); // 防止页面滚动
+            this.auto_move_enabled = !this.auto_move_enabled;
+            if (this.auto_move_enabled) {
+
+            } else {
+
+            }
+            return;
+        }
+
+                if (key in this.keys_pressed && !this.keys_pressed[key]) {
+                    this.keys_pressed[key] = true;
+
+                }
+            });
+
+            document.addEventListener('keyup', (e) => {
+                const key = e.key.toLowerCase();
+                if (key in this.keys_pressed) {
+                    this.keys_pressed[key] = false;
+                }
+            });
+
+let wasdHintShown = false;
+
+document.addEventListener('wheel', () => {
+    if (wasdHintShown) return;
+    wasdHintShown = true;
+
+    const wasdHint = document.createElement('div');
+    wasdHint.textContent = 'try wasd';
+    wasdHint.style.cssText = `
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10000;
+        font-family: swiss-721-bt, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 100;
+        font-style: normal;
+        font-style: italic;
+        font-size: 1.875rem;
+        color: #000;
+        pointer-events: none;
+        opacity: 1;
+        transition: opacity 1s ease;
+    `;
+    document.body.appendChild(wasdHint);
+
+    setTimeout(() => {
+        wasdHint.style.opacity = '0';
+        setTimeout(() => wasdHint.remove(), 1000);
+    }, 2000);
+});
+
+        },
+
+        startAutoMove() {
+            const autoMove = () => {
+                if (this.auto_move_enabled) {
+
+                    let moveX = 0;
+                    let moveY = -this.base_speed; // 默认向上
+
+                    const hasBoost = this.keys_pressed.w || this.keys_pressed.a || 
+                                   this.keys_pressed.s || this.keys_pressed.d;
+
+                    if (hasBoost) {
+
+                        moveX = 0;
+                        moveY = 0;
+                        
+                        if (this.keys_pressed.w) moveY -= this.boost_speed; // 上
+                        if (this.keys_pressed.s) moveY += this.boost_speed; // 下
+                        if (this.keys_pressed.a) moveX -= this.boost_speed; // 左
+                        if (this.keys_pressed.d) moveX += this.boost_speed; // 右
+                    }
+
+                    this.autoMoveStep(moveX, moveY);
+                }
+                
+                requestAnimationFrame(autoMove);
+            };
+            
+            autoMove();
+
+        },
+    
+        autoMoveStep(dx, dy) {
+            this.img_data.forEach((img) => {
+                let duration = 0.05;
+                
+                img.mov_x += dx;
+                if (img.x + img.mov_x > this.content_width) {
+                    img.mov_x -= this.content_width;
+                    duration = 0;
+                }
+                if (img.x + img.mov_x < -this.photo_width) {
+                    img.mov_x += this.content_width;
+                    duration = 0;
+                }
+                
+                img.mov_y += dy;
+                if (img.y + img.mov_y > this.content_height) {
+                    img.mov_y -= this.content_height;
+                    duration = 0;
+                }
+                if (img.y + img.mov_y < -this.photo_height) {
+                    img.mov_y += this.content_height;
+                    duration = 0;
+                }
+                
+                if (img.ani) img.ani.kill();
+                img.ani = gsap.to(img.node, {
+                    transform: `translate(${img.mov_x}px,${img.mov_y}px)`,
+                    duration: duration,
+                    ease: 'linear'
+                });
+            });
+        },
+
+        resize() {
+            let imgs = [...document.querySelectorAll(".photos_line_photo")];
+            let lines = [...document.querySelectorAll(".photos_line")];
+
+            this.container_width = this.container.offsetWidth;
+            this.container_height = this.container.offsetHeight;
+
+            if (imgs.length > 0 && lines.length > 0) {
+            this.photo_width = imgs[0].offsetWidth;
+            this.photo_height = imgs[0].offsetHeight;
+
+            const firstLine = lines[0];
+            const photosInFirstLine = firstLine.querySelectorAll('.photos_line_photo');
+            if (photosInFirstLine.length > 0) {
+
+                let lineWidth = 0;
+                photosInFirstLine.forEach(photo => {
+                    const style = window.getComputedStyle(photo);
+                    lineWidth += photo.offsetWidth + 
+                                parseFloat(style.marginLeft) + 
+                                parseFloat(style.marginRight);
+                });
+                this.content_width = lineWidth;
+            }
+
+            let totalHeight = 0;
+            lines.forEach(line => {
+                const style = window.getComputedStyle(line);
+                totalHeight += line.offsetHeight + 
+                              parseFloat(style.marginTop) + 
+                              parseFloat(style.marginBottom);
+            });
+            this.content_height = totalHeight;
+
+        }
+
+            this.scale_nums = 1;
+            this.container.style.transform = `scale(${this.scale_nums})`;
+
+            gsap.to(imgs, {
+                transform: `translate(0,0)`,
+                duration: 0,
+                ease: 'power4.out'
+            });
+            this.img_data = [];
+            imgs.forEach(img => {
+                this.img_data.push({
+                    node: img,
+                    x: img.offsetLeft,
+                    y: img.offsetTop,
+                    mov_x: 0,
+                    mov_y: 0,
+                    ani: 0
+                });
+            });
+        },
+
+        move(x, y) {
+            if (!this.if_movable) return 0;
+            let distance_x = (x - this.mouse_x) / this.scale_nums;
+            let distance_y = (y - this.mouse_y) / this.scale_nums;
+
+            this.img_data.forEach((img) => {
+                let duration = 1;
+
+                img.mov_x += distance_x;
+                if (img.x + img.mov_x > this.content_width) {
+                    img.mov_x -= this.content_width;
+                    duration = 0;
+                }
+                if (img.x + img.mov_x < -this.photo_width) {
+                    img.mov_x += this.content_width;
+                    duration = 0;
+                }
+                img.mov_y += distance_y;
+                if (img.y + img.mov_y > this.content_height) {
+                    img.mov_y -= this.content_height;
+                    duration = 0;
+                }
+                if (img.y + img.mov_y < -this.photo_height) {
+                    img.mov_y += this.content_height;
+                    duration = 0;
+                }
+                if (img.ani) img.ani.kill();
+                img.ani = gsap.to(img.node, {
+                    transform: `translate(${img.mov_x}px,${img.mov_y}px)`,
+                    duration: duration,
+                    ease: 'power4.out'
+                });
+            });
+            this.mouse_x = x;
+            this.mouse_y = y;
+        }
+    };
+    photobox.init();
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+    const customCursor = document.getElementById('custom-cursor');
+    const photoContainers = document.querySelectorAll('.photos_line_photo');
+    document.addEventListener('mousemove', (e) => {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
+    });
+
+    photoContainers.forEach(container => {
+        container.addEventListener('mouseenter', () => {
+            const cursorText = container.getAttribute('data-cursor-text');
+            
+            customCursor.textContent = cursorText;
+            
+            customCursor.style.opacity = '1';
+        });
+
+        container.addEventListener('mouseleave', () => {
+            customCursor.style.opacity = '0';
+        });
+    });
+});
+
+function positionElements() {
+    const mobile = window.innerWidth <= 768;
+    const header = document.querySelector('.header');
+    const contact = document.querySelector('.contact');
+    header.style.top = mobile ? '6vh' : '';
+    header.style.left = mobile ? '50%' : '';
+    header.style.transform = mobile ? 'translate(-50%, -50%)' : '';
+    contact.style.bottom = mobile ? '4vh' : '';
+    contact.style.left = mobile ? '50%' : '';
+    contact.style.transform = mobile ? 'translateX(-50%)' : '';
+}
+
+    window.positionElements = positionElements;
+
+    window.addEventListener('load', () => {
+        setTimeout(positionElements, 200);
+    });
+    window.addEventListener('resize', () => {
+        setTimeout(positionElements, 100);
+    });
+
+    function initIndexMenu() {
+    document.querySelectorAll('.index-menu').forEach(menu => {
+        const trigger = menu.querySelector('.index-trigger');
+        const list = menu.querySelector('.index-list');
+
+        trigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.querySelectorAll('.index-list').forEach(l => {
+                if (l !== list) l.classList.remove('active');
+            });
+            list.classList.toggle('active');
+            document.querySelectorAll('.index-trigger').forEach(button => button.setAttribute('aria-expanded', button.parentElement.querySelector('.index-list').classList.contains('active')));
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.index-menu')) {
+            document.querySelectorAll('.index-list').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.index-trigger').forEach(button => button.setAttribute('aria-expanded', 'false'));
+        }
+    });
+
+    const indexList = document.querySelector('.index-menu--right .index-list');
+    if (indexList) {
+        const seen = new Set();
+        const items = [];
+
+        document.querySelectorAll('.photos_line_photo').forEach(photo => {
+            const name = photo.getAttribute('data-cursor-text');
+            const link = photo.querySelector('a');
+            const href = link ? link.getAttribute('href') : '#';
+
+            if (name && !seen.has(name)) {
+                seen.add(name);
+                items.push({ name, href });
+            }
+        });
+
+        indexList.innerHTML = items.map(item => `
+            <div class="index-item">
+                <a href="${item.href}" target="_blank">${item.name}</a>
+            </div>
+        `).join('');
+    }
+}
+
+initIndexMenu();
+
+document.querySelectorAll('a').forEach(link => {
+    if (!link.hasAttribute('target')) {
+        link.setAttribute('target', '_blank');
+    }
+});
+
+</script>
+
+</html>

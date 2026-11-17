@@ -1,0 +1,10 @@
+# Publish only the site and its referenced media.
+*
+!/.gitignore
+!/.nojekyll
+!/index.html
+!/gsap.js
+!/photos/
+!/photos/*.jpg
+!/assets/
+!/assets/*
