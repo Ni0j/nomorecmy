@@ -448,28 +448,15 @@ a img {
         #work-viewer .inverse-toggle { background: transparent; color: inherit; }
         .inverse-toggle { position: fixed; right: 2rem; bottom: 2rem; z-index: 1000; border: 0; padding: 0; color: #000; background: #f2f2f2; }
         @media (max-width: 768px) { .inverse-toggle { right: 1rem; bottom: 1rem; } }
-        @font-palette-values --circle-outline {
-            font-family: 'Cursor Apple';
-            override-colors: 7 #000, 8 transparent, 9 transparent;
-        }
-        @font-palette-values --circle-filled {
-            font-family: 'Cursor Apple';
-            override-colors: 7 transparent, 8 #000, 9 transparent;
-        }
-        body .inverse-toggle {
-            font-family: 'Cursor Apple' !important;
-            font-size: 18px !important;
-            line-height: 1;
-            font-palette: --circle-outline;
-        }
-        html.is-inverted .inverse-toggle { font-palette: --circle-filled; }
+        .inverse-toggle, .index-trigger, #work-close { appearance: none; -webkit-appearance: none; border-radius: 0; }
+        .control-icon { display: block; pointer-events: none; }
         html.is-inverted body, html.is-inverted body * { cursor: url('cursor-white.svg') 4 4, auto !important; }
         html.is-inverted body .photos_line_photo:hover, html.is-inverted body .photos_line_photo:hover * { cursor: none !important; }
     </style>
 </head>
 
 <body>
-    <button type="button" class="inverse-toggle" aria-label="Inverse" aria-pressed="false">p</button>
+    <button type="button" class="inverse-toggle" aria-label="Inverse" aria-pressed="false"><svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1035 1200" width="18.63" height="21.6" aria-hidden="true" focusable="false"><g transform="translate(0 1000) scale(1 -1)"><path fill="currentColor" opacity="0.251" d="M762 467C762 332 652 223 517 223C382 223 273 332 273 467C273 602 382 711 517 711C652 711 762 602 762 467ZM722 467C722 580 630 671 517 671C404 671 313 580 313 467C313 354 404 263 517 263C630 263 722 354 722 467Z"/><path fill="currentColor" opacity="0.094" d="M741 467C741 591 641 691 517 691C394 691 293 591 293 467C293 343 394 243 517 243C641 243 741 343 741 467Z"/><path fill="currentColor" opacity="0.765" d="M538 488H497V935H538ZM50 448V488H496V448ZM538 448V488H985V448ZM538 0H497V447H538Z"/></g></svg></button>
 
     <div class="header">
         <div class="text">
@@ -480,7 +467,7 @@ a img {
     <div class="contact"><p class="contact_text">Design in black, white and grey.</p></div>
 
     <div class="index-menu index-menu--right">
-        <button class="index-trigger right" aria-label="Submit" aria-expanded="false">c</button>
+        <button class="index-trigger right" aria-label="Submit" aria-expanded="false"><svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 711 1200" width="12.798" height="21.6" aria-hidden="true" focusable="false"><g transform="translate(0 1000) scale(1 -1)"><path fill="white" d="M416 366V611H295V366H50V244H295V0H416V244H661V366ZM620 285H375V41H335V285H91V325H335V570H375V325H620Z"/><path fill="currentColor" d="M620 285H375V41H335V285H91V325H335V570H375V325H620Z"/></g></svg></button>
         <div class="index-list">
             <div class="index-item">Submissions open periodically through open calls.</div>
             <div class="index-item">There is no open call at present. Guidelines and submission details will be published here when the next call opens.</div>
@@ -502,8 +489,8 @@ a img {
     </div>
     
 <dialog id="work-viewer" aria-label="Work viewer" aria-describedby="work-caption">
-        <button id="work-close" type="button" aria-label="Close work">X</button>
-        <button type="button" class="inverse-toggle" aria-label="Inverse" aria-pressed="false">p</button>
+        <button id="work-close" type="button" aria-label="Close work"><svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 711 1200" width="12.798" height="21.6" aria-hidden="true" focusable="false"><g transform="translate(0 1000) scale(1 -1)"><path fill="white" d="M416 366V611H295V366H50V244H295V0H416V244H661V366ZM620 285H375V41H335V285H91V325H335V570H375V325H620Z"/><path fill="currentColor" d="M620 285H375V41H335V285H91V325H335V570H375V325H620Z"/></g></svg></button>
+        <button type="button" class="inverse-toggle" aria-label="Inverse" aria-pressed="false"><svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1035 1200" width="18.63" height="21.6" aria-hidden="true" focusable="false"><g transform="translate(0 1000) scale(1 -1)"><path fill="currentColor" opacity="0.251" d="M762 467C762 332 652 223 517 223C382 223 273 332 273 467C273 602 382 711 517 711C652 711 762 602 762 467ZM722 467C722 580 630 671 517 671C404 671 313 580 313 467C313 354 404 263 517 263C630 263 722 354 722 467Z"/><path fill="currentColor" opacity="0.094" d="M741 467C741 591 641 691 517 691C394 691 293 591 293 467C293 343 394 243 517 243C641 243 741 343 741 467Z"/><path fill="currentColor" opacity="0.765" d="M538 488H497V935H538ZM50 448V488H496V448ZM538 448V488H985V448ZM538 0H497V447H538Z"/></g></svg></button>
         <figure><div id="work-media"></div><figcaption id="work-caption"></figcaption></figure>
     </dialog>
 </body>
