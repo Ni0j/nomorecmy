@@ -388,7 +388,7 @@ a img {
         .contact { width: auto; left: 2rem; transform: none; bottom: 2rem; }
         .header { z-index: 100; pointer-events: none; }
         .index-menu--left .index-list { min-width: 17rem; }
-        .index-menu--right .index-item { display: block; background: #fff; margin-bottom: .4rem; padding: .1em .3em; box-sizing: border-box; }
+        .index-menu .index-item { display: block; background: #fff; margin-bottom: .4rem; padding: .1em .3em; box-sizing: border-box; width: auto; line-height: 1.4; }
         .index-menu--right .index-list { min-width: 17rem; }
         .index-list { max-height: 0; }
         .index-list.active { overflow-y: auto; max-height: 75vh; }
@@ -442,6 +442,7 @@ a img {
         }
         body .index-trigger, body #work-close { font-family: 'Cursor Apple' !important; font-size: 18px !important; line-height: 1; }
         body, body * { cursor: url('cursor.svg') 4 4, auto !important; }
+        body .photos_line_photo:hover, body .photos_line_photo:hover * { cursor: none !important; }
         html.is-inverted { filter: invert(1); background: #0d0d0d; }
         html.is-inverted #work-viewer { filter: invert(1); }
         #work-viewer .inverse-toggle { background: transparent; color: inherit; }
@@ -473,8 +474,8 @@ a img {
     <div class="index-menu index-menu--left">
         <button class="index-trigger left" aria-label="About" aria-expanded="false">?</button>
         <div class="index-list">
-            <div class="index-item"><em class="project-name">No More CMY</em> is an emerging collection of work in black, white and grey, giving these works a stage of their own.</div><br><br>
-            <div class="index-item">Bringing together publications, graphic works and other visual practices, it offers a place to discover, revisit and draw inspiration from the collection.</div><br><br>
+            <div class="index-item"><em class="project-name">No More CMY</em> is an emerging collection of work in black, white and grey, giving these works a stage of their own.</div>
+            <div class="index-item">Bringing together publications, graphic works and other visual practices, it offers a place to discover, revisit and draw inspiration from the collection.</div>
             <div class="index-item">A shared space for those who create, collect and appreciate it.</div>
         </div>
     </div>
