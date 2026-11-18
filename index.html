@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>no more cmy</title>
+    <title>No More CMY</title>
     <meta name="description" content="A stage for work in black, white and grey, and a shared space for those who create, collect and appreciate it.">
-    <link rel="icon" href="data:,">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="https://use.typekit.net/bqk8rmx.css">
     <script src="gsap.js"></script>
     <style>
@@ -441,15 +441,22 @@ a img {
             font-display: swap;
         }
         body .index-trigger, body #work-close { font-family: 'Cursor Apple' !important; font-size: 18px !important; line-height: 1; }
+        body, body * { cursor: url('cursor.svg') 4 4, auto !important; }
+        html.is-inverted { filter: invert(1); background: #0d0d0d; }
+        html.is-inverted #work-viewer { filter: invert(1); }
+        #work-viewer .inverse-toggle { background: transparent; color: inherit; }
+        .inverse-toggle { position: fixed; right: 2rem; bottom: 2rem; z-index: 1000; border: 0; padding: 0; color: #000; background: #f2f2f2; }
+        @media (max-width: 768px) { .inverse-toggle { right: 1rem; bottom: 1rem; } }
     </style>
 </head>
 
 <body>
+    <button type="button" class="inverse-toggle" aria-pressed="false">Inverse</button>
 
     <div class="header">
         <div class="text">
             
-            <p class="text">no more cmy</p>
+            <p class="text">No More CMY</p>
         </div>
     </div>
     <div class="contact"><p class="contact_text">Design in black, white and grey.</p></div>
@@ -466,7 +473,7 @@ a img {
     <div class="index-menu index-menu--left">
         <button class="index-trigger left" aria-label="About" aria-expanded="false">?</button>
         <div class="index-list">
-            <div class="index-item"><em class="project-name">no more cmy</em> is an emerging collection of work in black, white and grey, giving these works a stage of their own.</div><br><br>
+            <div class="index-item"><em class="project-name">No More CMY</em> is an emerging collection of work in black, white and grey, giving these works a stage of their own.</div><br><br>
             <div class="index-item">Bringing together publications, graphic works and other visual practices, it offers a place to discover, revisit and draw inspiration from the collection.</div><br><br>
             <div class="index-item">A shared space for those who create, collect and appreciate it.</div>
         </div>
@@ -478,10 +485,17 @@ a img {
     
 <dialog id="work-viewer" aria-label="Work viewer" aria-describedby="work-caption">
         <button id="work-close" type="button" aria-label="Close work">X</button>
+        <button type="button" class="inverse-toggle" aria-pressed="false">Inverse</button>
         <figure><div id="work-media"></div><figcaption id="work-caption"></figcaption></figure>
     </dialog>
 </body>
 <script>
+    document.querySelectorAll('.inverse-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const inverted = document.documentElement.classList.toggle('is-inverted');
+            document.querySelectorAll('.inverse-toggle').forEach(toggle => toggle.setAttribute('aria-pressed', String(inverted)));
+        });
+    });
     const photobox = {
         container: document.querySelector(".photos"),
         img_data: [],
@@ -556,7 +570,7 @@ a img {
             this.container.addEventListener('touchend', endTouch);
             this.container.addEventListener('touchcancel', endTouch);
             document.addEventListener('wheel', (event) => {
-                if (this.viewer_open || event.target.closest('.index-menu') || event.ctrlKey) return;
+                if (this.viewer_open || event.target.closest('.index-menu, .inverse-toggle') || event.ctrlKey) return;
                 event.preventDefault();
                 const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1;
                 const dx = event.shiftKey && !event.deltaX ? event.deltaY : event.deltaX;
