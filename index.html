@@ -458,6 +458,10 @@ a img {
         .index-item .submission-link { padding: 0; text-decoration: underline; text-underline-offset: .2em; }
         @media (max-width: 768px) {
             :root { --site-text-size: 10pt; }
+            .photos {
+                -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 7%, black 93%, transparent 100%);
+                mask-image: linear-gradient(to bottom, transparent 0%, black 7%, black 93%, transparent 100%);
+            }
             .index-menu--bottom { top: auto; bottom: 1rem; }
         }
         html.is-inverted body, html.is-inverted body * { cursor: url('cursor-white.svg') 4 4, auto !important; }
