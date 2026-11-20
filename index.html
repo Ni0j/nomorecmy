@@ -79,11 +79,6 @@ font-style: normal;
     text-align: left;
 }
 
-@keyframes blink-soft {
-    0%   { opacity: 1; }
-    50%  { opacity: 0.15; }   
-    100% { opacity: 1; }
-}
 
 .index-trigger {
     font-style: normal;
@@ -97,9 +92,6 @@ font-style: normal;
 }
 .left{
     text-align: left;
-}
-.index-menu--right .index-item:hover {
-    animation: blink-soft 1.6s ease-in-out infinite;  
 }
 
 .index-list {
@@ -134,9 +126,6 @@ font-style: normal;
     font-size: 0.875rem;
 }
 
-.index-menu--right .index-item:hover {
-    animation: blink-soft 1.6s ease-in-out infinite;
-}
 
 .index-item a {
     color: #111314;
@@ -356,7 +345,7 @@ a img {
     .header{
         left: 50%; 
         transform: translate(-50%, -50%);
-        top: 6vh;
+        top: 50%;
     }
     .contact{
         bottom:4vh;
@@ -402,11 +391,11 @@ a img {
             .index-list { max-width: calc(100vw - 2rem); }
             .index-menu--right .index-list { width: 17rem; }
         }
-        :root { --site-font: swiss-721-bt, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        :root { --site-text-size: 14px; --site-font: swiss-721-bt, 'Helvetica Neue', Helvetica, Arial, sans-serif; }
         body { isolation: isolate; }
         body, body * {
             font-family: var(--site-font) !important;
-            font-size: 14px !important;
+            font-size: var(--site-text-size) !important;
             font-weight: 400 !important;
             font-style: normal !important;
         }
@@ -432,7 +421,7 @@ a img {
         #work-viewer * { cursor: auto; }
         #work-close { cursor: pointer; }
         @media (max-width: 768px) { #work-viewer { padding: 20px 16px 32px; } }
-        body .project-name { font-style: italic !important; }
+        body .project-name, body .submission-status { font-style: italic !important; }
         @font-face {
             font-family: 'Cursor Apple';
             src: url('fonts/Cursor-Apple.otf') format('opentype');
@@ -446,17 +435,38 @@ a img {
         html.is-inverted { filter: invert(1); background: #0d0d0d; }
         html.is-inverted #work-viewer { filter: invert(1); }
         #work-viewer .inverse-toggle { background: transparent; color: inherit; }
-        .inverse-toggle { position: fixed; right: 2rem; bottom: 2rem; z-index: 1000; border: 0; padding: 0; color: #000; background: #f2f2f2; }
+        .inverse-toggle { position: fixed; right: 2rem; bottom: 2rem; z-index: 1000; border: 0; padding: 0; color: #000; background: transparent; }
         @media (max-width: 768px) { .inverse-toggle { right: 1rem; bottom: 1rem; } }
         .inverse-toggle, .index-trigger, #work-close { appearance: none; -webkit-appearance: none; border-radius: 0; }
         .control-icon { display: block; pointer-events: none; }
+        .index-menu--bottom { top: auto; bottom: 2rem; }
+        .index-menu--bottom .index-list { top: auto; bottom: calc(100% + .5rem); }
+        .index-list:not(.active) { visibility: hidden; }
+        .index-list.active { visibility: visible; }
+        body .submit-trigger { font-family: var(--site-font) !important; font-size: var(--site-text-size) !important; line-height: 1.4; }
+        .index-trigger, .inverse-toggle { display: grid; place-items: center; min-width: 44px; min-height: 44px; box-sizing: border-box; padding: 12px; margin: -12px; }
+        .index-trigger:focus-visible, .inverse-toggle:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+        .inverse-toggle .control-icon { width: 12px; height: 12px; }
+        .inverse-toggle .inverse-filled { display: none; }
+        .inverse-toggle[aria-pressed="true"] .inverse-outline { display: none; }
+        .inverse-toggle[aria-pressed="true"] .inverse-filled { display: block; }
+        .index-item .contact-link { position: relative; display: inline-block; padding: 0; margin-left: -1px; text-decoration: none; }
+        .contact-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: .05em; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right center; transition: transform .3s ease; }
+        .contact-link:hover::after, .contact-link:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+        @media (prefers-reduced-motion: reduce) { .contact-link::after { transition: none; } }
+        .credit-name { white-space: nowrap; }
+        .index-item .submission-link { padding: 0; text-decoration: underline; text-underline-offset: .2em; }
+        @media (max-width: 768px) {
+            :root { --site-text-size: 10pt; }
+            .index-menu--bottom { top: auto; bottom: 1rem; }
+        }
         html.is-inverted body, html.is-inverted body * { cursor: url('cursor-white.svg') 4 4, auto !important; }
         html.is-inverted body .photos_line_photo:hover, html.is-inverted body .photos_line_photo:hover * { cursor: none !important; }
     </style>
 </head>
 
 <body>
-    <button type="button" class="inverse-toggle" aria-label="Inverse" aria-pressed="false"><svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1035 1200" width="18.63" height="21.6" aria-hidden="true" focusable="false"><g transform="translate(0 1000) scale(1 -1)"><path fill="currentColor" opacity="0.251" d="M762 467C762 332 652 223 517 223C382 223 273 332 273 467C273 602 382 711 517 711C652 711 762 602 762 467ZM722 467C722 580 630 671 517 671C404 671 313 580 313 467C313 354 404 263 517 263C630 263 722 354 722 467Z"/><path fill="currentColor" opacity="0.094" d="M741 467C741 591 641 691 517 691C394 691 293 591 293 467C293 343 394 243 517 243C641 243 741 343 741 467Z"/><path fill="currentColor" opacity="0.765" d="M538 488H497V935H538ZM50 448V488H496V448ZM538 448V488H985V448ZM538 0H497V447H538Z"/></g></svg></button>
+    <button type="button" class="inverse-toggle" title="Inverse" aria-label="Inverse" aria-pressed="false"><svg class="control-icon inverse-outline" aria-hidden="true"><use href="assets/cursor-controls.svg#inverse-outline"/></svg><svg class="control-icon inverse-filled" aria-hidden="true"><use href="assets/cursor-controls.svg#inverse-filled"/></svg></button>
 
     <div class="header">
         <div class="text">
@@ -464,23 +474,33 @@ a img {
             <p class="text">No More CMY</p>
         </div>
     </div>
-    <div class="contact"><p class="contact_text">Design in black, white and grey.</p></div>
+
 
     <div class="index-menu index-menu--right">
-        <button class="index-trigger right" aria-label="Submit" aria-expanded="false"><svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1035 1200" width="18.63" height="21.6" aria-hidden="true" focusable="false"><g transform="translate(0 1000) scale(1 -1)"><path fill="currentColor" opacity="0.251" d="M762 467C762 332 652 223 517 223C382 223 273 332 273 467C273 602 382 711 517 711C652 711 762 602 762 467ZM722 467C722 580 630 671 517 671C404 671 313 580 313 467C313 354 404 263 517 263C630 263 722 354 722 467Z"/><path fill="currentColor" opacity="0.094" d="M741 467C741 591 641 691 517 691C394 691 293 591 293 467C293 343 394 243 517 243C641 243 741 343 741 467Z"/><path fill="currentColor" opacity="0.765" d="M538 488H497V935H538ZM50 448V488H496V448ZM538 448V488H985V448ZM538 0H497V447H538Z"/></g></svg></button>
-        <div class="index-list">
-            <div class="index-item">Submissions open periodically through open calls.</div>
-            <div class="index-item">There is no open call at present. Guidelines and submission details will be published here when the next call opens.</div>
+        <button type="button" class="index-trigger right submit-trigger" aria-label="Submit" aria-expanded="false" aria-controls="submit-panel" title="Submit"><svg class="control-icon" width="18" height="18" aria-hidden="true"><use href="assets/cursor-controls.svg#submit"/></svg></button>
+        <div class="index-list" id="submit-panel">
+            <div class="index-item">Submissions open periodically through open calls. Share your work for a chance to be featured in the No More CMY collection.</div>
+            <div class="index-item">Current status: <em class="submission-status">Open</em> until <time datetime="2026-12-04">Dec 4</time></div>
+            <div class="index-item"><a class="submission-link" href="https://forms.gle/rmih6bYw6uE37VP59" target="_blank" rel="noopener noreferrer">View guidelines &amp; submit</a></div>
         </div>
     </div>
 
     <div id="custom-cursor"></div>
     <div class="index-menu index-menu--left">
-        <button class="index-trigger left" aria-label="About" aria-expanded="false">?</button>
-        <div class="index-list">
-            <div class="index-item"><em class="project-name">No More CMY</em> is an emerging collection of work in black, white and grey, giving these works a stage of their own.</div>
-            <div class="index-item">Bringing together publications, graphic works and other visual practices, it offers a place to discover, revisit and draw inspiration from the collection.</div>
-            <div class="index-item">A shared space for those who create, collect and appreciate it.</div>
+        <button class="index-trigger left" aria-label="About" aria-expanded="false" aria-controls="about-panel" title="About">?</button>
+        <div class="index-list" id="about-panel">
+            <div class="index-item"><em class="project-name">No More CMY</em> is an emerging independent project bringing together creative work in black, white and grey.</div>
+            <div class="index-item">Starting with printed matter, we are building a growing collection shaped by a shared fascination with monochrome, open to work from different disciplines.</div>
+            <div class="index-item">A place for anyone drawn to black, white and grey to discover, share and connect.</div>
+            <div class="index-item"><a class="contact-link" aria-label="Instagram @nomorecmy" href="https://www.instagram.com/nomorecmy/" target="_blank" rel="noopener noreferrer">@nomorecmy</a></div>
+        </div>
+    </div>
+    <div class="index-menu index-menu--left index-menu--bottom">
+        <button type="button" class="index-trigger" aria-label="Credits" aria-expanded="false" aria-controls="credits-panel" title="Credits"><svg class="control-icon" width="18" height="18" aria-hidden="true"><use href="assets/cursor-controls.svg#credits"/></svg></button>
+        <div class="index-list" id="credits-panel">
+            <p class="index-item">Website design and implementation<br>by <span class="credit-name">Nio Jin</span></p>
+            <p class="index-item">© 2026 No More CMY<br>All rights reserved</p>
+            <p class="index-item">All works © their respective creators</p>
         </div>
     </div>
     <div class="photos-wrapper">
@@ -490,7 +510,7 @@ a img {
     
 <dialog id="work-viewer" aria-label="Work viewer" aria-describedby="work-caption">
         <button id="work-close" type="button" aria-label="Close work">X</button>
-        <button type="button" class="inverse-toggle" aria-label="Inverse" aria-pressed="false"><svg class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1035 1200" width="18.63" height="21.6" aria-hidden="true" focusable="false"><g transform="translate(0 1000) scale(1 -1)"><path fill="currentColor" opacity="0.251" d="M762 467C762 332 652 223 517 223C382 223 273 332 273 467C273 602 382 711 517 711C652 711 762 602 762 467ZM722 467C722 580 630 671 517 671C404 671 313 580 313 467C313 354 404 263 517 263C630 263 722 354 722 467Z"/><path fill="currentColor" opacity="0.094" d="M741 467C741 591 641 691 517 691C394 691 293 591 293 467C293 343 394 243 517 243C641 243 741 343 741 467Z"/><path fill="currentColor" opacity="0.765" d="M538 488H497V935H538ZM50 448V488H496V448ZM538 448V488H985V448ZM538 0H497V447H538Z"/></g></svg></button>
+        <button type="button" class="inverse-toggle" title="Inverse" aria-label="Inverse" aria-pressed="false"><svg class="control-icon inverse-outline" aria-hidden="true"><use href="assets/cursor-controls.svg#inverse-outline"/></svg><svg class="control-icon inverse-filled" aria-hidden="true"><use href="assets/cursor-controls.svg#inverse-filled"/></svg></button>
         <figure><div id="work-media"></div><figcaption id="work-caption"></figcaption></figure>
     </dialog>
 </body>
@@ -822,13 +842,10 @@ a img {
 function positionElements() {
     const mobile = window.innerWidth <= 768;
     const header = document.querySelector('.header');
-    const contact = document.querySelector('.contact');
-    header.style.top = mobile ? '6vh' : '';
+    header.style.top = mobile ? '50%' : '';
     header.style.left = mobile ? '50%' : '';
     header.style.transform = mobile ? 'translate(-50%, -50%)' : '';
-    contact.style.bottom = mobile ? '4vh' : '';
-    contact.style.left = mobile ? '50%' : '';
-    contact.style.transform = mobile ? 'translateX(-50%)' : '';
+
 }
 
     window.positionElements = positionElements;
